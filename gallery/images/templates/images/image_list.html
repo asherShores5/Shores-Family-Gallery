@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Family Image Gallery</title>
+    <!-- Add CSS for grid layout -->
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 16px;
+            padding: 16px;
+        }
+        .gallery-item {
+            width: 100%;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
     <h1>Family Image Gallery</h1>
-    <div>
+    <div class="gallery-grid">
         {% for image in images %}
             <div>
-                <h2>{{ image.title }}</h2>
-                <img src="{{ image.image.url }}" alt="{{ image.title }}">
-                <p>{{ image.description }}</p>
+                <a href="{{ image.image.url }}" data-lightbox="gallery" data-title="{{ image.title }}">
+                    <img src="{{ image.thumbnail.url }}" alt="{{ image.title }}">
+                </a>
             </div>
         {% endfor %}
     </div>
